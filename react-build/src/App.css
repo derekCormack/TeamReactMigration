@@ -6,7 +6,11 @@
   height: 40vmin;
   pointer-events: none;
 }
-
+.img {
+  width:20vmin;
+  height: 20vmin;
+  /* padding: 2vmin; */
+}
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
@@ -35,4 +39,26 @@
   to {
     transform: rotate(360deg);
   }
+}
+@keyframes img {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
+.img:hover {
+  transform: scale(1.2);  
+  transition: transform 1s;
+}
+
+.header {
+  background-color: white;
+  display:flex;
+  justify-content: space-evenly;
+  margin: 0 auto;
+
+ 
 }
