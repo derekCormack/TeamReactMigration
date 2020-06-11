@@ -1,0 +1,21 @@
+.bankContainer {
+    width: 400px;
+    border: 15px solid rgb(41, 63, 41);
+    border-radius: 20px;
+    border-style: solid;
+    border-width: 3px;
+    padding: 50px;
+    background-color: rgb(152, 222, 243);
+    text-align: center;
+    margin: 75px;
+    height: auto;
+}
+
+.card {
+    align: center;
+    border-style: solid;
+    border-radius: 5px;
+    background-color: white;
+    width: 20em;
+    
+}
