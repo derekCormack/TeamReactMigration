@@ -174,4 +174,4 @@ class AccountController {
 
 // }
 
-export default { Account, AccountController };
+export default AccountController;

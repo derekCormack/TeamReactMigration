@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Logo from './components/logo.js';
 import './App.css';
 import logo from './components/logo.svg';
-import Accounts from './components/account/accountComp.js';
+import Accounts from './components/account/accountsComp.js';
 import Game from './components/tictactoe.js';
 // import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -13,6 +13,7 @@ class App extends Component {
     this.state = {
       appToRender: <Accounts />,
     }
+    console.log("what's state: ", this.state.appToRender);
   }
 
   logoClick = (parm) => {
