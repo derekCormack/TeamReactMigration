@@ -8,10 +8,14 @@ class Account {
     }
 
     deposit(amt) {
-        //let amount = parseFloat(amt);
+        let bal = parseFloat(this.balance)
+
         if (amt < 0) {
             return "Amount entered is negative";
-        } else return (this.balance += amt).toFixed(2);
+        } else {
+            this.balance = bal + amt
+            return (bal += amt);
+        }
     }
 
     withdrawal(amt) {
@@ -43,7 +47,14 @@ class AccountController {
         const account = new Account(key, name, type, balance);
         this.allAccounts.push(account);
     }
+    findAccount(name) {
+        for (let i = 0; i < this.allAccounts.length; i++) {
+            if (name === this.allAccounts[i].name) {
+                return i
+            }
+        }
 
+    }
     getAccount(key) {
         for (var i = 0; i < this.allAccounts.length; i++) {
             if (key === this.allAccounts[i].key) {
@@ -70,16 +81,20 @@ class AccountController {
         return max;
     }
 
-    getLowestBalance() {
-        let min = this.allAccounts[0].balance;
-        for (var i = 1; i < this.allAccounts.length; i++) {
-            if (this.allAccounts[i].balance < min) {
-                min = this.allAccounts[i].balance;
-            }
+    getLowestBalance() {  
+
+         if (this.counter===1) {
+            return 0;
         }
-        return min;
+            let min = this.allAccounts[0].balance;
+            for (var i = 1; i < this.allAccounts.length; i++) {
+                if (this.allAccounts[i].balance < min) {
+                    min = this.allAccounts[i].balance;
+                }
+            }
+            return min;
+        
     }
-    
     deleteAcct(key) {
         let account = this.getAccount(key);
         let index = this.allAccounts.indexOf(account)
@@ -174,4 +189,4 @@ class AccountController {
 
 // }
 
-export default AccountController;
+export default { AccountController, Account };

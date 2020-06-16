@@ -44,6 +44,8 @@ test('Has the Account been added?', () => {
     key = myAccountCtrl.addAcct('Bac', "Savings", 700);
     totBal = myAccountCtrl.totalAcctBalance();
     expect(totBal).toBe(1700);
+    console.log(myAccountCtrl.a)
+    expect(myAccountCtrl.findAccount("Bac")).toBe(1);
 
     let highestBalance = myAccountCtrl.getHighestBalance();
     expect(highestBalance).toBe(700);

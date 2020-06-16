@@ -2,7 +2,7 @@ import React from 'react';
 import './bankborder.css';
 // import { BootstrapTable} from 'react-bootstrap-table';
 // import '../../../node_modules/react-bootstrap-table/css/react-bootstrap-table.css'
-import AccountController from '../../business/account';
+import func from '../../business/account';
 import AccountCard from './accountCard';
 
 class Accounts extends React.Component {
@@ -11,14 +11,14 @@ class Accounts extends React.Component {
 
     constructor() {
         super();
-        this.accController = new AccountController();
+        this.accController = new func.AccountController();
         this.state = {
             allReactAccounts: [],
             idAccountName: 0,
             idAccountBalance: 0,
             idAccountType: "Chequing",
-            count: 0,
-            selAcct: ""
+            selAcct: "Account not selected",
+            counter: 0
         }
 
     }
@@ -27,10 +27,10 @@ class Accounts extends React.Component {
         console.log("doesthis work")
 
         this.setState({
-            selAcct: e.target.name
+            selAcct: e.target.id
         })
 
-        console.log(this.state.selAcct)
+        console.log("Selected card: ",this.state.selAcct)
     }
 
 
@@ -49,22 +49,23 @@ class Accounts extends React.Component {
         // account.balance = ...;
 
         this.accController.addAcct(this.state.idAccountName, this.state.idAccountType, this.state.idAccountBalance)
-        let newAccounts = []
-        for (var i = 0; i < this.accController.allAccounts.length; i++) {
-            console.log(this.accController.allAccounts[i].type)
-            newAccounts.push(<AccountCard key={i} selectAccount={console.log("working??")} name={this.accController.allAccounts[i].name} type={this.accController.allAccounts[i].type} balance={this.accController.allAccounts[i].balance} />);
-        }
+        // let newAccounts = []
+        // for (var i = 0; i < this.accController.allAccounts.length; i++) {
+        //     console.log(this.accController.allAccounts[i].type)
+        //     newAccounts.push(<AccountCard key={i} selectAccount={this.handleSelectAccount} name={this.accController.allAccounts[i].name} type={this.accController.allAccounts[i].type} balance={this.accController.allAccounts[i].balance} />);
+        // }
         //this.setState({count: this.state.count++});
+        // this.setState({
+        //     allReactAccounts: newAccounts
+        // })
         this.setState({
-            allReactAccounts: newAccounts
-        })
-
+            counter: 0
+        });
         console.log("new state 1: ", this.state);
         console.log("is allAccounts actually pushed? ", this.accController.allAccounts);
 
     }
     getAccountType = (e) => {
-        console.log(e.target.value)
         this.setState({
             idAccountType: e.target.value
         })
@@ -75,47 +76,59 @@ class Accounts extends React.Component {
         })
     }
     getAccountBalance = (e) => {
+        let bal =Number(e.target.value);
         this.setState({
-            idAccountBalance: e.target.value
+
+            idAccountBalance: bal
         })
     }
+    delete = () => {
+        console.log("hi");
+        this.accController.deleteAcct("k1");
+        this.setState({
+            counter: 0
+        });
+    }
+
     depositMoney = () => {
+        let position=this.accController.findAccount(this.state.selAcct);
         let deposit = document.getElementById("idAccountDeposit").value;
         console.log("Deposited money: ", deposit);
-        this.setState({
-            allReactAccounts: this.accController.allAccounts
-            //idAccountBalance: parseInt(this.state.idAccountBalance) + parseInt(deposit)
-        });
+        console.log(this.accController.allAccounts[position].deposit(Number(deposit)))
+        // this.setState({
+        //     allReactAccounts: this.accController.allAccounts
+        //     //idAccountBalance: parseInt(this.state.idAccountBalance) + parseInt(deposit)
+        // });
         console.log("Updated balance after deposit: ", this.state.idAccountBalance);
+        this.setState({
+            counter: 0
+        });
     }
 
     withdrawMoney = () => {
+        let position=this.accController.findAccount(this.state.selAcct);
         let withdraw = document.getElementById("idAccountWithdraw").value;
         console.log("Withdrawl money: ", withdraw);
+        console.log(this.accController.allAccounts[position].withdrawal(Number(withdraw)))
         this.setState({
             idAccountBalance: parseInt(this.state.idAccountBalance) - parseInt(withdraw)
         })
         console.log("amount has been withdrawn: ", this.state.idAccountBalance);
     }
 
-
-    showBalances = () => {
-        console.log("current balance: ", this.state.idAccountBalance);
-        document.getElementById("showAccountBalances").innerHTML = this.state.idAccountBalance;
-    }
-
-
     render() {
         // const accs = this.accController.allAccounts.map((a)=> {
         //     return a.name
         // });
-
-        //  const accs = [];
-        //  for (var i = 0; i < this.accController.allAccounts.length; i++) {
-        //      accs.push(<AccountCard key={i} name={this.accController.allAccounts[i].name} balance={this.accController.allAccounts[i].balance} />);
-        //   }
-        //<Account name={this.accController.allAccounts[i].name} balance={this.accController.allAccounts[i].balance} />
-
+        const total = this.accController.totalAcctBalance();
+        const highest = this.accController.getHighestBalance();
+        const lowest = this.accController.getLowestBalance();
+        
+        const accs = [];
+         
+        for (var i = 0; i < this.accController.allAccounts.length; i++) {
+            accs.push(<AccountCard key={i} selectAccount={this.handleSelectAccount} name={this.accController.allAccounts[i].name} type={this.accController.allAccounts[i].type} balance={this.accController.allAccounts[i].balance} />);
+        }
         return (
             <div>
 
@@ -131,25 +144,22 @@ class Accounts extends React.Component {
                     </select><br />
                     <button onClick={this.createClick}>Create account</button><br />
                     <br /><br /><br />
-                    <div>
-                        <select id="accountSelect">
-                        </select>
-                        <br />
-                    </div>
-                    <button>delete account</button><br />
+                    <p className="currentAccount">
+                        Selected Account: {this.state.selAcct}<br /><br />
+                    </p>
+                    <button onClick={this.delete}>delete account</button><br />
                     <span>enter amount to deposit</span><br />
-                    <input id="idAccountDeposit" />
+                    <input id="idAccountDeposit" type="number" placeholder="Enter Amount" />
                     <button onClick={this.depositMoney}>deposit</button><br />
                     <span>enter amount to withdraw</span><br />
-                    <input id="idAccountWithdraw" />
+                    <input id="idAccountWithdraw" type="number" placeholder="Enter Amount" />
                     <button onClick={this.withdrawMoney}>withdraw</button><br /><br /><br />
-                    <button onClick={this.showBalances}>Show Balances</button><br />
-                    <span id="showAccountBalances"> </span><br /><br />
-                    <button>view balance below: </button><br />
-                    <span>total-highest-lowest</span><br />
+                    <span className="currentAccount">Total of Accounts:  {total} </span><br />
+                    <span className="currentAccount">Highest Account:  {highest}</span><br />
+                    <span className="currentAccount">Lowest Account: {lowest}</span><br />
                     <span>List of accounts</span><br /><br />
-                    {/* {accs} */}
-                    {this.state.allReactAccounts}
+                    {accs}
+                    {/* {this.state.allReactAccounts} */}
                 </div>
             </div>
         );

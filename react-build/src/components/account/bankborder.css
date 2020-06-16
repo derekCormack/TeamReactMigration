@@ -17,6 +17,10 @@
     background-color: white;
     width: 20em;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    transition: 0.3s; 
+    transition: 0.3s;
+    position: relative;
 }
-
+.currentAccount{
+    background-color:  rgb(182, 170, 224);
+    font-weight: 800;
+}
