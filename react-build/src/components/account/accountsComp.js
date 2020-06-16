@@ -3,52 +3,88 @@ import './bankborder.css';
 // import { BootstrapTable} from 'react-bootstrap-table';
 // import '../../../node_modules/react-bootstrap-table/css/react-bootstrap-table.css'
 import AccountController from '../../business/account';
-import Account from './accountComp';
+import AccountCard from './accountCard';
 
 class Accounts extends React.Component {
     //Creating object as "accController" of Class AccountController...
-    accController = new AccountController();
+
 
     constructor() {
         super();
+        this.accController = new AccountController();
         this.state = {
-            allAccounts: [<Account name="savings" balance="300" />,
-            <Account name="chequing" balance="700" />],
+            allReactAccounts: [],
             idAccountName: 0,
             idAccountBalance: 0,
+            idAccountType: "Chequing",
+            count: 0,
+            selAcct: ""
         }
-        //this.getAccountName = this.getAccountName.bind(this);        
-    }
-    
-    createClick = () => {
-        let accountName = document.getElementById("idAccountName").value
-        console.log(this.state.idAccountName)
-        console.log(this.state.idAccountBalance)
-        this.setState({
-            allAccounts: this.accController.allAccounts.push(<Account name= {this.state.idAccountName} balance={this.state.idAccountBalance} />)
-        })
-        console.log("new state 1: ", this.state);
-        console.log("is allAccounts actually pushed? ", this.accController.allAccounts);
-        console.log("is allAccounts actually pushed into the state? ", this.state.allAccounts);
+
     }
 
-    getAccountName =(e)=> {
+    handleSelectAccount = (e) => {
+        console.log("doesthis work")
+
+        this.setState({
+            selAcct: e.target.name
+        })
+
+        console.log(this.state.selAcct)
+    }
+
+
+    createClick = () => {
+
+        console.log(this.state.idAccountName)
+        console.log(this.state.idAccountBalance)
+        //step 1: create the object "account" of class Account
+        //step 2: add all values to the account attributes
+        //step 3: push that account object to AccountController's allAccounts array
+        //step 4: save AccountController to the React state's allReactAccounts
+        // let account = new Account();
+        // account.key = ...;
+        // account.name = ...;
+        // account.type = ...;
+        // account.balance = ...;
+
+        this.accController.addAcct(this.state.idAccountName, this.state.idAccountType, this.state.idAccountBalance)
+        let newAccounts = []
+        for (var i = 0; i < this.accController.allAccounts.length; i++) {
+            console.log(this.accController.allAccounts[i].type)
+            newAccounts.push(<AccountCard key={i} selectAccount={console.log("working??")} name={this.accController.allAccounts[i].name} type={this.accController.allAccounts[i].type} balance={this.accController.allAccounts[i].balance} />);
+        }
+        //this.setState({count: this.state.count++});
+        this.setState({
+            allReactAccounts: newAccounts
+        })
+
+        console.log("new state 1: ", this.state);
+        console.log("is allAccounts actually pushed? ", this.accController.allAccounts);
+
+    }
+    getAccountType = (e) => {
+        console.log(e.target.value)
+        this.setState({
+            idAccountType: e.target.value
+        })
+    }
+    getAccountName = (e) => {
         this.setState({
             idAccountName: e.target.value
         })
     }
-
-    getAccountBalance =(e)=> {
+    getAccountBalance = (e) => {
         this.setState({
             idAccountBalance: e.target.value
         })
     }
-
     depositMoney = () => {
         let deposit = document.getElementById("idAccountDeposit").value;
         console.log("Deposited money: ", deposit);
         this.setState({
-            idAccountBalance: parseInt(this.state.idAccountBalance) + parseInt(deposit)
+            allReactAccounts: this.accController.allAccounts
+            //idAccountBalance: parseInt(this.state.idAccountBalance) + parseInt(deposit)
         });
         console.log("Updated balance after deposit: ", this.state.idAccountBalance);
     }
@@ -59,7 +95,7 @@ class Accounts extends React.Component {
         this.setState({
             idAccountBalance: parseInt(this.state.idAccountBalance) - parseInt(withdraw)
         })
-        console.log("amount has been withdrawn: ", this.state.idAccountBalance);           
+        console.log("amount has been withdrawn: ", this.state.idAccountBalance);
     }
 
 
@@ -68,38 +104,52 @@ class Accounts extends React.Component {
         document.getElementById("showAccountBalances").innerHTML = this.state.idAccountBalance;
     }
 
-    
-    
-   // screen refresh? this is when you invoke state change
-   //  list of accounts (save in state) grab from JS app, controller
-   //   account counter....trigger refresh
-   // refresh on "create account"
-   //
-    
+
     render() {
+        // const accs = this.accController.allAccounts.map((a)=> {
+        //     return a.name
+        // });
+
+        //  const accs = [];
+        //  for (var i = 0; i < this.accController.allAccounts.length; i++) {
+        //      accs.push(<AccountCard key={i} name={this.accController.allAccounts[i].name} balance={this.accController.allAccounts[i].balance} />);
+        //   }
+        //<Account name={this.accController.allAccounts[i].name} balance={this.accController.allAccounts[i].balance} />
+
         return (
-            <div >
+            <div>
+
+
                 <div className="bankContainer">
                     <h1>------hello world------</h1>
                     <input id="idAccountName" onChange={this.getAccountName} placeholder="Account Name input"></input>
                     <br />
-                    <input id="idAccountBalance" onChange={this.getAccountBalance} placeholder="Account deposit"></input><br />
+                    <input id="idAccountBalance" type="number" onChange={this.getAccountBalance} placeholder="Account deposit"></input><br />
+                    <select id="idAccountType" onChange={this.getAccountType}>
+                        <option>Chequing</option>
+                        <option>Savings</option>
+                    </select><br />
                     <button onClick={this.createClick}>Create account</button><br />
                     <br /><br /><br />
-                    <span>choose account to delete?</span><br />
+                    <div>
+                        <select id="accountSelect">
+                        </select>
+                        <br />
+                    </div>
                     <button>delete account</button><br />
                     <span>enter amount to deposit</span><br />
-                    <input id="idAccountDeposit"/>
+                    <input id="idAccountDeposit" />
                     <button onClick={this.depositMoney}>deposit</button><br />
                     <span>enter amount to withdraw</span><br />
-                    <input id="idAccountWithdraw"/>
+                    <input id="idAccountWithdraw" />
                     <button onClick={this.withdrawMoney}>withdraw</button><br /><br /><br />
-                    <button onClick={ this.showBalances }>Show Balances</button><br />
+                    <button onClick={this.showBalances}>Show Balances</button><br />
                     <span id="showAccountBalances"> </span><br /><br />
                     <button>view balance below: </button><br />
                     <span>total-highest-lowest</span><br />
                     <span>List of accounts</span><br /><br />
-                    {this.state.allAccounts}
+                    {/* {accs} */}
+                    {this.state.allReactAccounts}
                 </div>
             </div>
         );
