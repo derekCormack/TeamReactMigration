@@ -32,5 +32,81 @@ class city {
     }
 
 }
+class community {
 
-export default {city};
+    constructor() {
+        this.citiesArray = [];
+        this.counter = 1
+    }
+    fromserver(array) {
+        for (let i = 0; i < array.length; i++) {
+            this.counter=array[i].key;
+            this.createCity(array[i].name, array[i].latitude, array[i].longitude, array[i].population);
+         }
+    }
+    createCity(name, latitude, longitude, population) {
+        let cityKey = this.counter++
+        this.citiesArray.push(new city(cityKey, name, latitude, longitude, population))
+        // let AAA= new city(cityKey, name, latitude, longitude, population);
+        // this.citiesArray[cityKey]=AAA;
+        return this.citiesArray[this.keyPosition(cityKey)]
+    }
+    getKeyFromName(name) {
+        for (let i = 0; i < this.citiesArray.length; i++) {
+            if (name == this.citiesArray[i].name) {
+                return this.citiesArray[i].key
+            }
+        }
+    }
+    keyPosition(theKey) {
+
+        for (let i = 0; i < this.citiesArray.length; i++) {
+            if (theKey == this.citiesArray[i].key) {
+                return i
+            }
+        }
+    }
+    deleteCity(key) {
+        // delete this.citiesArray[key];
+        this.citiesArray.splice(this.keyPosition(key), 1);
+    }
+    whichSphere(name) {
+        if (this.citiesArray[this.keyPosition(name)].latitude > 0) {
+            return "Northern Hemisphere"
+        }
+        if (this.citiesArray[this.keyPosition(name)].latitude < 0) {
+            return "Southern Hemisphere"
+        }
+        return "You are on the Equator"
+    }
+    getMostNothern() {
+        let N = -91
+        let I = ""
+        for (let i = 0; i < this.citiesArray.length; i++) {
+            if (this.citiesArray[i].latitude > N) {
+                N = this.citiesArray[i].latitude
+                I = i
+            }
+        }
+        return this.citiesArray[I].name
+    }
+    getMostSouthern() {
+        let S = 91
+        let I = ""
+        for (let i = 0; i < this.citiesArray.length; i++) {
+            if (this.citiesArray[i].latitude < S) {
+                S = this.citiesArray[i].latitude
+                I = i
+            }
+        }
+        return this.citiesArray[I].name
+    }
+    getPopulation() {
+        let total = 0
+        for (let i = 0; i < this.citiesArray.length; i++) {
+            total = total + this.citiesArray[i].population
+        }
+        return total
+    }
+}
+export default {city, community};

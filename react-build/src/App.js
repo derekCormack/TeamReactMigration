@@ -4,7 +4,7 @@ import './App.css';
 import logo from './components/logo.svg';
 import Accounts from './components/account/accountsComp.js';
 import Game from './components/tictactoe.js';
-import Cities from './components/cities/cities.js';
+import Cities from './components/cities/citiesComp.js';
 class App extends Component {
   constructor() {
     super()

@@ -18,14 +18,12 @@ class Accounts extends React.Component {
         }
 
     }
-    handleSelectAccount = (e) => {
+    handleSelectAccount = (name) => {
 
         this.setState({
-            selAcct: e.target.id
-
+            selAcct: name
         })
-
-        console.log("Selected card: ", this.state.selAcct)
+        
     }
 
 
@@ -64,11 +62,13 @@ class Accounts extends React.Component {
 
     delete = () => {
         let position = this.accController.findAccount(this.state.selAcct);//gives position within acctcontroller array
-        this.accController.deleteAcct(position);
+        if (typeof (position) !== 'undefined') {
+            this.accController.deleteAcct(position);
         this.setState({
             counter: 0
         });
     }
+}
 
     depositMoney = () => {
         let position = this.accController.findAccount(this.state.selAcct);//gives position within acctcontroller array
@@ -112,8 +112,12 @@ class Accounts extends React.Component {
         const accs = [];
 
         for (var i = 0; i < this.accController.allAccounts.length; i++) {
+            let name = this.accController.allAccounts[i].name
             accs.push(<AccountCard key={i} selectAccount={this.handleSelectAccount} name={this.accController.allAccounts[i].name} type={this.accController.allAccounts[i].type} balance={this.accController.allAccounts[i].balance} />);
         }
+        // for (var i = 0; i < this.accController.allAccounts.length; i++) {
+        //     accs.push(<AccountCard key={i} selectAccount={this.handleSelectAccount} name={this.accController.allAccounts[i].name} type={this.accController.allAccounts[i].type} balance={this.accController.allAccounts[i].balance} />);
+        // }
         return (
             <div>
                 <div className="bankContainer">
