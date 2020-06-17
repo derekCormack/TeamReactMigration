@@ -4,9 +4,7 @@ import './App.css';
 import logo from './components/logo.svg';
 import Accounts from './components/account/accountsComp.js';
 import Game from './components/tictactoe.js';
-// import 'bootstrap/dist/css/bootstrap.min.css';
-
-
+import Cities from './components/cities/cities.js';
 class App extends Component {
   constructor() {
     super()
@@ -25,24 +23,24 @@ class App extends Component {
         this.setState({ appToRender: <Logo /> });
         break;
       case "tictactoe":
-        this.setState({ appToRender: <Game /> }); 
+        this.setState({ appToRender: <Game /> });
         break;
       case "accounts":
         this.setState({ appToRender: <Accounts /> });
         break;
       default:
-        this.setState({ appToRender: <Logo /> });
+        this.setState({ appToRender: <Cities /> });
     }
 
   }
   render() {
     return (
       <div>
-        <div className ="header">
-          <div onClick={this.logoClick} todo="logo" className ="img"><img src={logo} className="App-logo img" alt="logo" /></div>
-          <div onClick={this.logoClick} todo="tictactoe" className ="img"><img src={logo} className="App-logo img" alt="logo" /></div>
-          <div onClick={this.logoClick} todo="accounts" className ="img"><img src={logo} className="App-logo img" alt="logo" /></div>
-          <div onClick={this.logoClick} todo="city" className ="img"><img src={logo} className="App-logo img" alt="logo" /></div>
+        <div className="header">
+          <div onClick={this.logoClick} todo="logo" className="img"><img src={logo} className="App-logo img" alt="logo" /></div>
+          <div onClick={this.logoClick} todo="tictactoe" className="img"><img src={logo} className="App-logo img" alt="logo" /></div>
+          <div onClick={this.logoClick} todo="accounts" className="img"><img src={logo} className="App-logo img" alt="logo" /></div>
+          <div onClick={this.logoClick} todo="city" className="img"><img src={logo} className="App-logo img" alt="logo" /></div>
         </div>
         {this.state.appToRender}
       </div>
