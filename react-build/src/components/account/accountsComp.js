@@ -113,11 +113,14 @@ class Accounts extends React.Component {
 
         for (var i = 0; i < this.accController.allAccounts.length; i++) {
             let name = this.accController.allAccounts[i].name
-            accs.push(<AccountCard key={i} selectAccount={this.handleSelectAccount} name={this.accController.allAccounts[i].name} type={this.accController.allAccounts[i].type} balance={this.accController.allAccounts[i].balance} />);
+            accs.push(<AccountCard 
+                key={i} 
+                selectAccount={this.handleSelectAccount} 
+                name={this.accController.allAccounts[i].name}
+                type={this.accController.allAccounts[i].type}
+                balance={this.accController.allAccounts[i].balance} />);
         }
-        // for (var i = 0; i < this.accController.allAccounts.length; i++) {
-        //     accs.push(<AccountCard key={i} selectAccount={this.handleSelectAccount} name={this.accController.allAccounts[i].name} type={this.accController.allAccounts[i].type} balance={this.accController.allAccounts[i].balance} />);
-        // }
+        
         return (
             <div>
                 <div className="bankContainer">
