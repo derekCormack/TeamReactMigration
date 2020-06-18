@@ -1,0 +1,10 @@
+
+.ccard {
+    border-style: solid;
+    border-radius: 10px;
+    background-color: rgb(198, 247, 206);
+    width: 15em;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.5s;
+    position: relative;
+}
