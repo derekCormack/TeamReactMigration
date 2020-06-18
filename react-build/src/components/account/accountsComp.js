@@ -65,7 +65,7 @@ class Accounts extends React.Component {
         if (typeof (position) !== 'undefined') {
             this.accController.deleteAcct(position);
         this.setState({
-            counter: 0
+            selAcct:""
         });
     }
 }
@@ -95,7 +95,8 @@ class Accounts extends React.Component {
             console.log("Withdrawl money: ", withdraw);
             console.log(this.accController.allAccounts[position].withdrawal(Number(withdraw)))
             this.setState({
-                idAccountBalance: parseInt(this.state.idAccountBalance) - parseInt(withdraw)
+                //idAccountBalance: parseInt(this.state.idAccountBalance) - parseInt(withdraw)
+                counter: 0            
             })
             console.log("amount has been withdrawn: ", this.state.idAccountBalance);
         }
@@ -112,7 +113,7 @@ class Accounts extends React.Component {
         const accs = [];
 
         for (var i = 0; i < this.accController.allAccounts.length; i++) {
-            let name = this.accController.allAccounts[i].name
+           // let name = this.accController.allAccounts[i].name
             accs.push(<AccountCard 
                 key={i} 
                 selectAccount={this.handleSelectAccount} 
