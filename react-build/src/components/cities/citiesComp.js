@@ -55,7 +55,7 @@ class Cities extends React.Component {
 
     }
     deleteCity = () => {
-        let positionInArray = this.accController.findAccount(this.state.selectedCity);//gives position within acctcontroller array
+        let positionInArray = this.community.findAccount(this.state.selectedCity);//gives position within acctcontroller array
    
         //     if (typeof (position) !== 'undefined') {
     //         this.accController.deleteAcct(position);
