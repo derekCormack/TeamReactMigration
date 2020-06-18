@@ -42,7 +42,7 @@ class Cities extends React.Component {
     }
     createCity = () => {
         this.community.createCity(this.state.cityName, this.state.population, this.state.latitude, this.state.longitude)
-       // console.log(this.community.citiesArray[0])
+        // console.log(this.community.citiesArray[0])
         this.setState({
             counter: 0
         })
@@ -54,17 +54,45 @@ class Cities extends React.Component {
         })
 
     }
+    popChange = () => {
+        let cityKey = this.community.getKeyFromName(this.state.selectedCity);//gives position within acctcontroller array
+        let keyPosition = this.community.keyPosition(cityKey);
+        console.log(cityKey)
+        console.log("key Position", keyPosition)
+        let populationChange = document.getElementById("popChange").value;
+        console.log(populationChange)
+        this.community.citiesArray[keyPosition].movedIn(Number(populationChange))
+        this.setState({
+            counter: 0
+        })
+        // if (typeof (position) !== 'undefined') {
+        //     let deposit = document.getElementById("idAccountDeposit").value;
+        //     console.log("position: ", position)
+        //     console.log("Deposited money: ", deposit);
+        //     console.log(this.accController.allAccounts[position].deposit(Number(deposit)))
+
+        //     console.log("Updated balance after deposit: ", this.state.idAccountBalance);
+        //     this.setState({
+        //         counter: 0
+        //     });
+        // }
+    }
     deleteCity = () => {
-        let positionInArray = this.accController.findAccount(this.state.selectedCity);//gives position within acctcontroller array
-   
+        let cityKey = this.community.getKeyFromName(this.state.selectedCity);//gives position within acctcontroller array
+        this.community.deleteCity(cityKey)
+        this.setState({
+            selectedCity: "City not selected"
+        })
         //     if (typeof (position) !== 'undefined') {
-    //         this.accController.deleteAcct(position);
-    //     this.setState({
-    //         selAcct:""
-    //     });
-    // }
-}
+        //         this.accController.deleteAcct(position);
+        //     this.setState({
+        //         selAcct:""
+        //     });
+        // }
+    }
     render() {
+        const northern = this.community.getMostNothern();
+      //  const southern = this.community.getMostSouthern();
         const allCards = [];
         for (var i = 0; i < this.community.citiesArray.length; i++) {
             // let name = this.accController.allAccounts[i].name
@@ -81,16 +109,20 @@ class Cities extends React.Component {
                 <div className="bankContainer">
                     <h2>City Migration</h2>
                     <h3>Community</h3>
-                    <input id="idCityName" onChange={this.getCityName} placeholder="City Name input"></input>
+                    City Name:<input id="idCityName" onChange={this.getCityName} placeholder="City Name input"></input>
                     <br />
-                    <input id="idPopulation" type="number" onChange={this.getPopulation} placeholder="Population input"></input><br />
-                    <input id="idLatitude" type="number" onChange={this.getLatitude} placeholder="Latitude input"></input>
+                    Population:<input id="idPopulation" type="number" onChange={this.getPopulation} placeholder="Population input"></input><br />
+                    Latitude:    <input id="idLatitude" type="number" onChange={this.getLatitude} placeholder="Latitude input"></input>
                     <br />
-                    <input id="idLongitude" type="number" onChange={this.getLongitude} placeholder="Longitude input"></input><br />
+                    Longitude:<input id="idLongitude" type="number" onChange={this.getLongitude} placeholder="Longitude input"></input><br />
                     <button onClick={this.createCity}>Create City</button><br /><br />
                     <p className="currentCity">
-                    Selected City: {this.state.selectedCity}<br /><br /></p>
-                    <button onClick={this.deleteCity}>delete account</button><br />
+                        Selected City: {this.state.selectedCity}<br /><br /></p>
+                    <button onClick={this.deleteCity}>delete account</button><br /><br />
+                    <input id="popChange" type="number" onChange={this.popChange} placeholder="Population Change"></input>
+                    <button onClick={this.popChange}>Move in/out</button><br /><br />
+                    <span className="currentAccount">Northern most city: {northern} </span><br />
+                    <span className="currentAccount">Southern most city:  </span><br />
                     {allCards}
                 </div>
             </div>

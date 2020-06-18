@@ -53,15 +53,14 @@ class community {
     }
     getKeyFromName(name) {
         for (let i = 0; i < this.citiesArray.length; i++) {
-            if (name == this.citiesArray[i].name) {
+            if (name === this.citiesArray[i].name) {
                 return this.citiesArray[i].key
             }
         }
     }
     keyPosition(theKey) {
-
         for (let i = 0; i < this.citiesArray.length; i++) {
-            if (theKey == this.citiesArray[i].key) {
+            if (theKey === this.citiesArray[i].key) {
                 return i
             }
         }
@@ -82,10 +81,15 @@ class community {
     getMostNothern() {
         let N = -91
         let I = ""
+        if (this.citiesArray.length===0) {
+            return "No cities entered";
+        }
         for (let i = 0; i < this.citiesArray.length; i++) {
             if (this.citiesArray[i].latitude > N) {
-                N = this.citiesArray[i].latitude
-                I = i
+                
+                N = this.citiesArray[i].latitude;
+                I = i;
+                console.log(N,I)
             }
         }
         return this.citiesArray[I].name

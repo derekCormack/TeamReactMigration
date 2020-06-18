@@ -19,14 +19,10 @@ class Accounts extends React.Component {
 
     }
     handleSelectAccount = (name) => {
-
         this.setState({
             selAcct: name
         })
-        
     }
-
-
     createClick = () => {
 
         console.log(this.state.idAccountName)
@@ -64,11 +60,11 @@ class Accounts extends React.Component {
         let position = this.accController.findAccount(this.state.selAcct);//gives position within acctcontroller array
         if (typeof (position) !== 'undefined') {
             this.accController.deleteAcct(position);
-        this.setState({
-            selAcct:""
-        });
+            this.setState({
+                selAcct: ""
+            });
+        }
     }
-}
 
     depositMoney = () => {
         let position = this.accController.findAccount(this.state.selAcct);//gives position within acctcontroller array
@@ -96,7 +92,7 @@ class Accounts extends React.Component {
             console.log(this.accController.allAccounts[position].withdrawal(Number(withdraw)))
             this.setState({
                 //idAccountBalance: parseInt(this.state.idAccountBalance) - parseInt(withdraw)
-                counter: 0            
+                counter: 0
             })
             console.log("amount has been withdrawn: ", this.state.idAccountBalance);
         }
@@ -113,15 +109,15 @@ class Accounts extends React.Component {
         const accs = [];
 
         for (var i = 0; i < this.accController.allAccounts.length; i++) {
-           // let name = this.accController.allAccounts[i].name
-            accs.push(<AccountCard 
-                key={i} 
-                selectAccount={this.handleSelectAccount} 
+            // let name = this.accController.allAccounts[i].name
+            accs.push(<AccountCard
+                key={i}
+                selectAccount={this.handleSelectAccount}
                 name={this.accController.allAccounts[i].name}
                 type={this.accController.allAccounts[i].type}
                 balance={this.accController.allAccounts[i].balance} />);
         }
-        
+
         return (
             <div>
                 <div className="bankContainer">

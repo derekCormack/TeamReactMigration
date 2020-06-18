@@ -49,19 +49,6 @@ test('Check the Community ', () => {
 
 
 
-// // test example derek
-// import City from "./city.js";
-// import Community from "./community.js";
-
-// test("is my city working?", () => {
-//     //This test is for testing the constructor
-//     let city = new City('Calgary', '45N', '40E', 120000);
-//     expect(city.name).toBe("Calgary");
-//     expect(city.latitude).toBe("45N");
-//     expect(city.longitude).toBe("40E");
-//     expect(city.population).toBe(120000);
-// });
-
 // test("is show() method working?", () => {
 //     let city = new City('Edmonton', '50N', '55E', 100000);
 //     expect(city.show()).toBe("City Name: " + city.name + " Latitude: " + city.latitude + " Longitude: " + city.longitude + " Population: " + city.population);
