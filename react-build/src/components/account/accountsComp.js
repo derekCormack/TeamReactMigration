@@ -24,10 +24,10 @@ class Accounts extends React.Component {
     }
 
     handleSelectAccount = (e) => {
-        console.log("doesthis work")
+        console.log(e.target.id)
 
         this.setState({
-            selAcct: e.target.name
+            selAcct: e.target.id
         })
 
         console.log(this.state.selAcct)
@@ -52,7 +52,7 @@ class Accounts extends React.Component {
         let newAccounts = []
         for (var i = 0; i < this.accController.allAccounts.length; i++) {
             console.log(this.accController.allAccounts[i].type)
-            newAccounts.push(<AccountCard key={i} selectAccount={console.log("working??")} name={this.accController.allAccounts[i].name} type={this.accController.allAccounts[i].type} balance={this.accController.allAccounts[i].balance} />);
+            newAccounts.push(<AccountCard key={i} selectAccount={this.handleSelectAccount} name={this.accController.allAccounts[i].name} type={this.accController.allAccounts[i].type} balance={this.accController.allAccounts[i].balance} />);
         }
         //this.setState({count: this.state.count++});
         this.setState({
@@ -138,7 +138,7 @@ class Accounts extends React.Component {
                     </div>
                     <button>delete account</button><br />
                     <span>enter amount to deposit</span><br />
-                    <input id="idAccountDeposit" />
+                    <input id="idAccountDeposit" value={this.state.selAcct} readOnly /> {/*here...*/}
                     <button onClick={this.depositMoney}>deposit</button><br />
                     <span>enter amount to withdraw</span><br />
                     <input id="idAccountWithdraw" />
