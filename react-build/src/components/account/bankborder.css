@@ -20,7 +20,7 @@
     transition: 0.3s;
     position: relative;
 }
-.currentAccount{
+.currentAccount, .currentCity{
     background-color:  rgb(182, 170, 224);
     font-weight: 800;
 }
