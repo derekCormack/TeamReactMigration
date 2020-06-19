@@ -1,4 +1,5 @@
-global.fetch = require('node-fetch');
+// global.fetch = require('node-fetch');
+
 
 import functions from './fetch.js'
 
