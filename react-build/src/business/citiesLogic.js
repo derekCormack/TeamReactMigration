@@ -23,7 +23,6 @@ class city {
         this.population = this.population - num;
     }
     howBig() {
-
         if (this.population < 101) return "Hamlet";
         if (this.population < 1001) return "Village";
         if (this.population < 20001) return "Town";
@@ -86,10 +85,8 @@ class community {
         }
         for (let i = 0; i < this.citiesArray.length; i++) {
             if (this.citiesArray[i].latitude > N) {
-                
                 N = this.citiesArray[i].latitude;
                 I = i;
-                console.log(N,I)
             }
         }
         return this.citiesArray[I].name
@@ -97,7 +94,10 @@ class community {
     getMostSouthern() {
         let S = 91
         let I = ""
-        for (let i = 0; i < this.citiesArray.length; i++) {
+        if (this.citiesArray.length===0) {
+            return "No cities entered";
+        }
+            for (let i = 0; i < this.citiesArray.length; i++) {
             if (this.citiesArray[i].latitude < S) {
                 S = this.citiesArray[i].latitude
                 I = i

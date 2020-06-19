@@ -7,12 +7,10 @@ class City extends Component {
         const {cityName,lat,long,pop,type} = this.props;
         return (
                 <div className="card" onClick={() => this.props.selectCity(cityName)}>
-                    <p>Hello</p>
-                    <p > City: {cityName}</p>
+                    <p > {type} of {cityName}</p>
                     <p > Population: {pop}</p>
-                    <p > Type: {type}</p>
                     <p > Latitude: {lat}</p>
-                    <p > Logitude: {long}</p>
+                    <p > Longitude: {long}</p>
                 </div>
         );
     }

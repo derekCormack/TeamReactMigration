@@ -13,6 +13,7 @@ class Cities extends React.Component {
             population: 0,
             latitude: 0,
             longitude: 0,
+            popChange:0,
             counter: 0
         }
     }
@@ -27,7 +28,7 @@ class Cities extends React.Component {
         this.setState({
             population: pop
         })
-    }
+     }
     getLatitude = (e) => {
         let lat = Number(e.target.value);
         this.setState({
@@ -39,14 +40,13 @@ class Cities extends React.Component {
         this.setState({
             longitude: long
         })
-    }
+     }
     createCity = () => {
-        this.community.createCity(this.state.cityName, this.state.population, this.state.latitude, this.state.longitude)
+        this.community.createCity(this.state.cityName, this.state.latitude, this.state.longitude, this.state.population,)
         // console.log(this.community.citiesArray[0])
         this.setState({
             counter: 0
         })
-
     }
     handleSelectCity = (name) => {
         this.setState({
@@ -54,13 +54,10 @@ class Cities extends React.Component {
         })
 
     }
-    popChange = () => {
+    MoveInOut = () => {
         let cityKey = this.community.getKeyFromName(this.state.selectedCity);//gives position within acctcontroller array
         let keyPosition = this.community.keyPosition(cityKey);
-        console.log(cityKey)
-        console.log("key Position", keyPosition)
         let populationChange = document.getElementById("popChange").value;
-        console.log(populationChange)
         this.community.citiesArray[keyPosition].movedIn(Number(populationChange))
         this.setState({
             counter: 0
@@ -92,8 +89,9 @@ class Cities extends React.Component {
     }
     render() {
         const northern = this.community.getMostNothern();
-      //  const southern = this.community.getMostSouthern();
+        const southern = this.community.getMostSouthern();
         const allCards = [];
+       
         for (var i = 0; i < this.community.citiesArray.length; i++) {
             // let name = this.accController.allAccounts[i].name
             allCards.push(<City
@@ -102,7 +100,8 @@ class Cities extends React.Component {
                 cityName={this.community.citiesArray[i].name}
                 lat={this.community.citiesArray[i].latitude}
                 long={this.community.citiesArray[i].longitude}
-                pop={this.community.citiesArray[i].population} />);
+                pop={this.community.citiesArray[i].population}
+                type={this.community.citiesArray[i].howBig()} />);
         }
         return (
             <div>
@@ -119,10 +118,10 @@ class Cities extends React.Component {
                     <p className="currentCity">
                         Selected City: {this.state.selectedCity}<br /><br /></p>
                     <button onClick={this.deleteCity}>delete account</button><br /><br />
-                    <input id="popChange" type="number" onChange={this.popChange} placeholder="Population Change"></input>
-                    <button onClick={this.popChange}>Move in/out</button><br /><br />
+                    <input id="popChange" type="number" placeholder="Population Change"></input>
+                    <button onClick={this.MoveInOut}>Move in/out</button><br /><br />
                     <span className="currentAccount">Northern most city: {northern} </span><br />
-                    <span className="currentAccount">Southern most city:  </span><br />
+                    <span className="currentAccount">Southern most city: {southern} </span><br />
                     {allCards}
                 </div>
             </div>
