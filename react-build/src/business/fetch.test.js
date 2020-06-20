@@ -15,43 +15,40 @@ const data = [
     { "name": "Upendra", "surname": "Ranjit", "gender": "male", "region": "Nepal" }, 
     { "name": "Dumitra", "surname": "Vicovean", "gender": "female", "region": "Romania" }
 ]
+// test('Testing getUsers.', async () =>{
+//     const url = 'https://jsonplaceholder.typicode.com/users';
+//     let data = await functions.getUsers(url);
+//     expect(data.length).toBe(10);
+//     expect(data[0].name).toBe("Leanne Graham");
+//     // await functions.workWithData(); 
+// });
 
-test('check get functions', () => {
+// test('check me', () => {
 
-    expect(functions.getFirstName(data)).toBe("Maricica");
-    expect(functions.getAllFirstNames(data)).toEqual(["Maricica","Nishant","Nicuță","Barbara","Stanca","Bella","Fabian","Славчо","Upendra","Dumitra"]);
+//     const me = [{ 
+//         "name": "Bob", 
+//         "surname": "Tanner", 
+//         "gender": "male", 
+//         "region": "Canada" 
+//     }];
+ 
+//     // console.log(me);
+//     expect(functions.getFirstName(me)).toBe("Bob");
+  
+//     const sMe = JSON.stringify(me);
+//     //console.log(sMe);
 
-});
+// });
+
+// test('check get functions', () => {
+
+//     expect(functions.getFirstName(data)).toBe("Maricica");
+//     expect(functions.getAllFirstNames(data)).toEqual(["Maricica","Nishant","Nicuță","Barbara","Stanca","Bella","Fabian","Славчо","Upendra","Dumitra"]);
+
+// });
 //    test('Testing showdelay.', async () =>{
 //     let show = await functions.showDelaySolution();
 // });
-
-test('Testing getUsers.', async () =>{
-    const url = 'https://jsonplaceholder.typicode.com/users';
-
-    let data = await functions.getUsers(url);
-    expect(data.length).toBe(10);
-    await functions.workWithData(); 
-});
-
-
-test('check me', () => {
-
-    const me = [{ 
-        "name": "Bob", 
-        "surname": "Tanner", 
-        "gender": "male", 
-        "region": "Canada" 
-    }];
- 
-    // console.log(me);
-    expect(functions.getFirstName(me)).toBe("Bob");
-  
-    const sMe = JSON.stringify(me);
-    //console.log(sMe);
-
-});
-
 
 
 test('test that the fetch works?', async () => {

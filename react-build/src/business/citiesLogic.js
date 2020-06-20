@@ -8,16 +8,13 @@ class city {
         this.population = population;
         this.key = key
     }
-    //to sort k = data.sort((a,b) => {return b.key -a.key});
-    // if (data.status ===200) {
-    //         return DataCue;
-    // } return 'SERVER ERROR':
-    //     }
     show() {
         return this.name + " has " + this.population + " people at position " + this.latitude + "/" + this.longitude;
     }
     movedIn(num) {
+        if (this.population + num > 0  ) {
         this.population = this.population + num;
+        }
     }
     movedOut(num) {
         this.population = this.population - num;
@@ -45,22 +42,20 @@ class community {
     }
     createCity(name, latitude, longitude, population) {
         let cityKey = this.counter++
-        this.citiesArray.push(new city(cityKey, name, latitude, longitude, population))
-        // let AAA= new city(cityKey, name, latitude, longitude, population);
-        // this.citiesArray[cityKey]=AAA;
-        return this.citiesArray[this.keyPosition(cityKey)]
+        this.citiesArray.push(new city(cityKey, name, latitude, longitude, population))// let AAA= new city(cityKey, name, latitude, longitude, population) this.citiesArray[cityKey]=AAA;
+            return this.citiesArray[this.keyPosition(cityKey)]
     }
     getKeyFromName(name) {
         for (let i = 0; i < this.citiesArray.length; i++) {
             if (name === this.citiesArray[i].name) {
-                return this.citiesArray[i].key
+            return this.citiesArray[i].key
             }
         }
     }
     keyPosition(theKey) {
         for (let i = 0; i < this.citiesArray.length; i++) {
             if (theKey === this.citiesArray[i].key) {
-                return i
+            return i
             }
         }
     }
@@ -107,10 +102,10 @@ class community {
     }
     getPopulation() {
         let total = 0
-        for (let i = 0; i < this.citiesArray.length; i++) {
+         for (let i = 0; i < this.citiesArray.length; i++) {
             total = total + this.citiesArray[i].population
         }
-        return total
+         return total
     }
 }
 export default {city, community};

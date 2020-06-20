@@ -1,3 +1,4 @@
+//hey.....use zoom link in discord
 
 const functions = {
    
@@ -10,8 +11,6 @@ const functions = {
         const element = []
         for (let index = 0; index < data.length; index++) {
             element.push(data[index]["name"]);
-
-
         } return element
     },
     showDelayProblem() {
@@ -38,12 +37,11 @@ const functions = {
         }
     },
 
-    async getUsers(aaa) {
+    async getUsers(url) {
         try {
-            let jjj ='https://jsonplaceholder.typicode.com/users'
-        //hardcoding causes a get which works, referenceing causes a post which does not
-            const response = await fetch('https://jsonplaceholder.typicode.com/users');
+            const response = await fetch(url);
             const data = await response.json();
+            console.log("user displayed:", data);
             return data;
         } catch (error) {
             console.error('Error:', error);

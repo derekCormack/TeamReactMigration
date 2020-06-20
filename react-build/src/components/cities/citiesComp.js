@@ -1,7 +1,25 @@
 import React from 'react';
 import City from './citiesCard';
 import func from '../../business/citiesLogic';
+import functions from '../../business/fetch';
 
+let data = ""
+const url = 'http://localhost:5000/';
+const cities = [
+    { "key": 1, "name": "Calgary", "latitude": 51.05, "longitude": -114.05, "population": 1300000 },
+    { "key": 2, "name": "Edmonton", "latitude": 53.55, "longitude": -113.49, "population": 1000000 },
+    { "key": 3, "name": "Red Deer", "latitude": 52.28, "longitude": -113.81, "population": 250000 }
+];
+
+// window.addEventListener('DOMContentLoaded', async () => {
+//     data = await functions.postData(url + 'all');
+//     community.fromserver(data)
+//     //-----add all cards   
+//     Account.functions.createAllCards(community.citiesArray, idContainer);
+//     //--------add cities to selector
+//     Account.functions.createSelectCity(idSelectCity, community.citiesArray);
+//     console.log(data);
+// });
 class Cities extends React.Component {
 
     constructor() {
@@ -17,7 +35,10 @@ class Cities extends React.Component {
             counter: 0
         }
     }
-
+    nukeServer = async () => {
+       console.log("nuke server")
+       data = await functions.postData(url + 'clear');
+    }
     getCityName = (e) => {
         this.setState({ cityName: e.target.value })
     }
@@ -33,8 +54,10 @@ class Cities extends React.Component {
         this.setState ({ longitude:  Number(e.target.value) })  
     }
     createCity = () => {
-        this.community.createCity(this.state.cityName, this.state.latitude, this.state.longitude, this.state.population,)
-        this.setState({ counter: 0 })
+        if (this.state.latitude <90 && this.state.latitude >-90) {
+            this.community.createCity(this.state.cityName, this.state.latitude, this.state.longitude, this.state.population,)
+            this.setState({ counter: 0 })
+        }
     }
     handleSelectCity = (name) => {
         this.setState({ selectedCity: name })
@@ -42,14 +65,19 @@ class Cities extends React.Component {
     moveInOut = () => {
         let cityKey = this.community.getKeyFromName(this.state.selectedCity);//gives position within acctcontroller array
         let keyPosition = this.community.keyPosition(cityKey);
-        let populationChange = document.getElementById("popChange").value;
-        this.community.citiesArray[keyPosition].movedIn(Number(populationChange))
-        this.setState({ counter: 0 })  
+        if (typeof (keyPosition) !== 'undefined') {
+            let populationChange = document.getElementById("popChange").value;
+            this.community.citiesArray[keyPosition].movedIn(Number(populationChange))
+            this.setState({ counter: 0 })  
+        }
     }
     deleteCity = () => {
         let cityKey = this.community.getKeyFromName(this.state.selectedCity);//gives position within acctcontroller array
-        this.community.deleteCity(cityKey)
-        this.setState({ selectedCity: "City not selected" })
+        console.log(cityKey)
+        if (typeof (cityKey) !== 'undefined') {
+            this.community.deleteCity(cityKey)
+            this.setState({ selectedCity: "City not selected" })
+        }
     }
     
     render() {
@@ -83,10 +111,10 @@ class Cities extends React.Component {
 
                     <p className="currentCity">Selected City: {this.state.selectedCity}<br /><br /></p>
 
-                    <button onClick={this.deleteCity}>delete account</button><br /><br />
+                    <button onClick={this.deleteCity}>Delete City</button><br /><br />
                     <input id="popChange" type="number" placeholder="Population Change"></input>
                     <button onClick={this.moveInOut}>Move in/out</button><br /><br />
-                    
+                    <button onClick={this.nukeServer}>Nuke the server</button><br /><br />
                     <span className="currentAccount">Northern most city: {northern} </span><br />
                     <span className="currentAccount">Southern most city: {southern} </span><br />
                     <span className="currentAccount">Global Population: {totalPop} </span><br />
