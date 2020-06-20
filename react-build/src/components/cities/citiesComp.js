@@ -31,13 +31,31 @@ class Cities extends React.Component {
             population: 0,
             latitude: 0,
             longitude: 0,
-            popChange:0,
+            popChange: 0,
             counter: 0
         }
     }
+    async componentDidMount () {
+        data = await functions.postData(url + 'all');
+        this.community.fromserver(data);
+        this.setState({ counter: 0 })
+    }
+
+
     nukeServer = async () => {
-       console.log("nuke server")
-       data = await functions.postData(url + 'clear');
+        console.log("nuke server")
+        data = await functions.postData(url + 'clear');
+    }
+    albertaCities = async () => {
+        console.log("Alberta Cities")
+        data = await functions.postData(url + 'add', cities[0]);
+        data = await functions.postData(url + 'add', cities[1]);
+        data = await functions.postData(url + 'add', cities[2]);;
+    }
+    pullfromserver = async () => {
+        data = await functions.postData(url + 'all');
+        this.community.fromserver(data);
+        this.setState({ counter: 0 })
     }
     getCityName = (e) => {
         this.setState({ cityName: e.target.value })
@@ -45,47 +63,53 @@ class Cities extends React.Component {
     getPopulation = (e) => {
         const pop = Number(e.target.value);
         this.setState({ population: pop })
-     }
+    }
     getLatitude = (e) => {
         const lat = Number(e.target.value);
         this.setState({ latitude: lat })
     }
     getLongitude = (e) => {
-        this.setState ({ longitude:  Number(e.target.value) })  
+        this.setState({ longitude: Number(e.target.value) })
     }
-    createCity = () => {
-        if (this.state.latitude <90 && this.state.latitude >-90) {
+    createCity = async () => {
+        if (this.state.latitude < 90 && this.state.latitude > -90) {
             this.community.createCity(this.state.cityName, this.state.latitude, this.state.longitude, this.state.population,)
             this.setState({ counter: 0 })
+            data = await functions.postData(url + 'add', 
+            this.community.citiesArray
+            [this.community.keyPosition(this.community.getKeyFromName(this.state.cityName))]);
         }
     }
     handleSelectCity = (name) => {
         this.setState({ selectedCity: name })
     }
-    moveInOut = () => {
+    moveInOut = async () => {
         let cityKey = this.community.getKeyFromName(this.state.selectedCity);//gives position within acctcontroller array
         let keyPosition = this.community.keyPosition(cityKey);
         if (typeof (keyPosition) !== 'undefined') {
             let populationChange = document.getElementById("popChange").value;
             this.community.citiesArray[keyPosition].movedIn(Number(populationChange))
-            this.setState({ counter: 0 })  
+            this.setState({ counter: 0 })
+            data = await functions.postData(url + 'update', this.community.citiesArray
+            [keyPosition]);
         }
     }
-    deleteCity = () => {
+    deleteCity = async () => {
         let cityKey = this.community.getKeyFromName(this.state.selectedCity);//gives position within acctcontroller array
         console.log(cityKey)
         if (typeof (cityKey) !== 'undefined') {
             this.community.deleteCity(cityKey)
             this.setState({ selectedCity: "City not selected" })
+            data = await functions.postData(url + 'delete', { key: Number(cityKey) });
         }
     }
-    
+
     render() {
         const northern = this.community.getMostNothern();
         const southern = this.community.getMostSouthern();
         const totalPop = this.community.getPopulation();
         const allCards = [];
-       
+
         for (var i = 0; i < this.community.citiesArray.length; i++) {
             // let name = this.accController.allAccounts[i].name
             allCards.push(<City
@@ -115,10 +139,12 @@ class Cities extends React.Component {
                     <input id="popChange" type="number" placeholder="Population Change"></input>
                     <button onClick={this.moveInOut}>Move in/out</button><br /><br />
                     <button onClick={this.nukeServer}>Nuke the server</button><br /><br />
+                    <button onClick={this.albertaCities}>Add Alberta Cities</button><br /><br />
+                    <button onClick={this.pullfromserver}>Pull from server</button><br /><br />
                     <span className="currentAccount">Northern most city: {northern} </span><br />
                     <span className="currentAccount">Southern most city: {southern} </span><br />
                     <span className="currentAccount">Global Population: {totalPop} </span><br />
-                        
+
                     {allCards}
                 </div>
             </div>
