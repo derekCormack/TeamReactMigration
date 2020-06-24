@@ -1,5 +1,5 @@
 import React, { Component} from 'react';
-import func from '../../business/citiesLogic';
+
 
 class City extends Component {
     

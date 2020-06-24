@@ -73,7 +73,7 @@ class community {
         return "You are on the Equator"
     }
     getMostNothern() {
-        let N = -91
+        let N = -90
         let I = ""
         if (this.citiesArray.length===0) {
             return "No cities entered";
@@ -87,7 +87,7 @@ class community {
         return this.citiesArray[I].name
     }
     getMostSouthern() {
-        let S = 91
+        let S = 90
         let I = ""
         if (this.citiesArray.length===0) {
             return "No cities entered";

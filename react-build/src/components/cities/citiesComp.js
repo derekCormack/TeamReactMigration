@@ -26,6 +26,7 @@ class Cities extends React.Component {
         super();
         this.community = new func.community()
         this.state = {
+            message: "",
             selectedCity: "City not selected",
             cityName: 0,
             population: 0,
@@ -45,15 +46,17 @@ class Cities extends React.Component {
     nukeServer = async () => {
         console.log("nuke server")
         data = await functions.postData(url + 'clear');
+        this.community.citiesArray=[]
+        this.setState({ counter: 0 })
     }
     albertaCities = async () => {
         console.log("Alberta Cities")
+        data = await functions.postData(url + 'clear');
         data = await functions.postData(url + 'add', cities[0]);
         data = await functions.postData(url + 'add', cities[1]);
         data = await functions.postData(url + 'add', cities[2]);;
-    }
-    pullfromserver = async () => {
         data = await functions.postData(url + 'all');
+        this.community.citiesArray=[]
         this.community.fromserver(data);
         this.setState({ counter: 0 })
     }
@@ -72,13 +75,15 @@ class Cities extends React.Component {
         this.setState({ longitude: Number(e.target.value) })
     }
     createCity = async () => {
-        if (this.state.latitude < 90 && this.state.latitude > -90) {
+        if (this.state.latitude < 90 && this.state.latitude > -90 && this.state.longitude < 180 && this.state.longitude > -180) {
             this.community.createCity(this.state.cityName, this.state.latitude, this.state.longitude, this.state.population,)
-            this.setState({ counter: 0 })
+            this.setState({ message: "" })
             data = await functions.postData(url + 'add', 
             this.community.citiesArray
             [this.community.keyPosition(this.community.getKeyFromName(this.state.cityName))]);
-        }
+        } else {
+            this.setState({ message: "Input Out of Range! Use lat [-90 to 90], long [-180 to 180]" });
+    }
     }
     handleSelectCity = (name) => {
         this.setState({ selectedCity: name })
@@ -131,7 +136,8 @@ class Cities extends React.Component {
                     Population: <input id="idPopulation" type="number" onChange={this.getPopulation} placeholder="Population input"></input><br />
                     Latitude:   <input id="idLatitude" type="number" onChange={this.getLatitude} placeholder="Latitude input"></input><br />
                     Longitude:  <input id="idLongitude" type="number" onChange={this.getLongitude} placeholder="Longitude input"></input><br />
-                    <button onClick={this.createCity}>Create City</button><br /><br />
+                    <button onClick={this.createCity}>Create City</button><br />
+                    <h4 style={{color:'red'}} >{this.state.message}</h4> 
 
                     <p className="currentCity">Selected City: {this.state.selectedCity}<br /><br /></p>
 
@@ -139,8 +145,7 @@ class Cities extends React.Component {
                     <input id="popChange" type="number" placeholder="Population Change"></input>
                     <button onClick={this.moveInOut}>Move in/out</button><br /><br />
                     <button onClick={this.nukeServer}>Nuke the server</button><br /><br />
-                    <button onClick={this.albertaCities}>Add Alberta Cities</button><br /><br />
-                    <button onClick={this.pullfromserver}>Pull from server</button><br /><br />
+                    <button onClick={this.albertaCities}>Revert to Alberta Cities</button><br /><br />
                     <span className="currentAccount">Northern most city: {northern} </span><br />
                     <span className="currentAccount">Southern most city: {southern} </span><br />
                     <span className="currentAccount">Global Population: {totalPop} </span><br />
