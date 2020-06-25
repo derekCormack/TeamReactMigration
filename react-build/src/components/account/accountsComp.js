@@ -1,5 +1,5 @@
 import React from 'react';
-import './bankborder.css';
+import styles from './bankborder.module.css';
 import func from '../../business/account';
 import AccountCard from './accountCard';
 
@@ -120,7 +120,7 @@ class Accounts extends React.Component {
 
         return (
             <div>
-                <div className="bankContainer">
+                <div className={styles.bankContainer}>
                     <h2>React Migration</h2>
                     <h3>Account Controller</h3>
                     <input id="idAccountName" onChange={this.getAccountName} placeholder="Account Name input"></input>
@@ -132,7 +132,7 @@ class Accounts extends React.Component {
                     </select><br />
                     <button onClick={this.createClick}>Create account</button><br />
                     <br /><br /><br />
-                    <p className="currentAccount">
+                    <p className={styles.currentAccount}>
                         Selected Account: {this.state.selAcct}<br /><br />
                     </p>
                     <button onClick={this.delete}>delete account</button><br />
@@ -142,9 +142,9 @@ class Accounts extends React.Component {
                     <span>enter amount to withdraw</span><br />
                     <input id="idAccountWithdraw" type="number" placeholder="Enter Amount" />
                     <button onClick={this.withdrawMoney}>withdraw</button><br /><br /><br />
-                    <span className="currentAccount">Total of Accounts:  {total} </span><br />
-                    <span className="currentAccount">Highest Account:  {highest}</span><br />
-                    <span className="currentAccount">Lowest Account: {lowest}</span><br />
+                    <span className={styles.currentAccount}>Total of Accounts:  {total} </span><br />
+                    <span className={styles.currentAccount}>Highest Account:  {highest}</span><br />
+                    <span className={styles.currentAccount}>Lowest Account: {lowest}</span><br />
                     <span>List of accounts</span><br /><br />
                     {accs}
                     {/* {this.state.allReactAccounts} */}

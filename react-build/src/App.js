@@ -41,11 +41,27 @@ class App extends Component {
     return (
       <div>
         <div className="header">
-          <div onClick={this.logoClick} todo="logo" className="img"><img src={logo} className="App-logo img" alt="logo" /></div>
-          <div onClick={this.logoClick} todo="tictactoe" className="img"><img src={logo} className="App-logo img" alt="logo" /></div>
-          <div onClick={this.logoClick} todo="accounts" className="img"><img src={logo} className="App-logo img" alt="logo" /></div>
-          <div onClick={this.logoClick} todo="city" className="img"><img src={logo} className="App-logo img" alt="logo" /></div>
-          <div onClick={this.logoClick} todo="list" className="img"><img src={logo} className="App-logo img" alt="logo" /></div>
+          <div onClick={this.logoClick} todo="logo" className="img">
+            <img src={logo} className="App-logo img" alt="logo" />
+            <span>   splash </span>
+          </div>
+          <div onClick={this.logoClick} todo="tictactoe" className="img">
+            <img src={logo} className="App-logo img" alt="logo" />
+            <span> TicTacToe </span>
+          </div>
+          <div onClick={this.logoClick} todo="accounts" className="img">
+            <img src={logo} className="App-logo img" alt="logo" />
+            <span> Acct Controller</span>
+          </div>
+          <div onClick={this.logoClick} todo="city" className="img">
+            <img src={logo} className="App-logo img" alt="logo" />
+            <span> City&Community </span>
+          </div>
+          <div onClick={this.logoClick} todo="list" className="img">
+            <img src={logo} className="App-logo img" alt="logo" />
+            <span> Link Lists </span>  
+          </div>
+          <br></br>
         </div>
         {this.state.appToRender}
       </div>

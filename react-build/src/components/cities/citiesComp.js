@@ -2,6 +2,10 @@ import React from 'react';
 import City from './citiesCard';
 import func from '../../business/citiesLogic';
 import functions from '../../business/fetch';
+import styles from './cities.module.css';
+
+//css module import format -for component/css pairing.
+//https://create-react-app.dev/docs/adding-a-css-modules-stylesheet/
 
 let data = ""
 const url = 'http://localhost:5000/';
@@ -128,7 +132,7 @@ class Cities extends React.Component {
         }
         return (
             <div>
-                <div className="bankContainer">
+                <div className={styles.cityContainer}>
                     <h2>City Migration</h2>
                     <h3>Community</h3>
 
@@ -148,7 +152,7 @@ class Cities extends React.Component {
                     <button onClick={this.albertaCities}>Revert to Alberta Cities</button><br /><br />
                     <span className="currentAccount">Northern most city: {northern} </span><br />
                     <span className="currentAccount">Southern most city: {southern} </span><br />
-                    <span className="currentAccount">Global Population: {totalPop} </span><br />
+                    <span className="currentAccount">Global Population: {totalPop} </span><br /><br/>
 
                     {allCards}
                 </div>

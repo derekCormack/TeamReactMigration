@@ -9,6 +9,7 @@
 .img {
   width:20vmin;
   height: 20vmin;
+  text-align: center;
   /* padding: 2vmin; */
 }
 @media (prefers-reduced-motion: no-preference) {

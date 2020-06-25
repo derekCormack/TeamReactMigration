@@ -49,43 +49,45 @@ class dblLinkedList {
     }
   }
 
+  deleteTail() {
+    if (!this.tail) {
+      return null
+    } else {
+      let removedTail = this.tail //if 1 node
+      return removedTail.value
+    }
+  }
+
   search(value) {
     let currentNode = this.head //track node
+
     while (currentNode) {
       if (currentNode.value === value) {
         return currentNode
       }
-      currentNode =
+      currentNode = currentNode.next
     }
+    return null
   }
-}
 
-    deleteTail() {
-      if (!this.tail) {
-        return null
-      } else {
-        let removedTail = this.tail //if 1 node
-        return removedTail.value
-      }
-    }
-
-
-class Node {
-  constructor(value, prev, next) {
-    this.value = value
-    this.prev = prev || null
-    this.next = next || null
-  }
+  // class Node {
+  // constructor(value, prev, next) {
+  //   this.value = value
+  //   this.prev = prev || null
+  //   this.next = next || null
+  // }
 }
 
 
 
 const List = () => {
 
-  return ( <
+  return (
+
+    <
     div >
 
-    Hello World <
+    .... <
     /div>
   );
 }
