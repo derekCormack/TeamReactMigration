@@ -1,4 +1,5 @@
 import React from 'react';
+import Pancake from './pancake';
 
 const LinkedList = () => {
 
@@ -7,7 +8,10 @@ const LinkedList = () => {
       <div>
         
       <h1>Linked list...here...</h1>
-  
+      {Pancake type={"wheat"}
+                diameter={1}
+                heatLevel={"cold"}
+
     
              
       </div>

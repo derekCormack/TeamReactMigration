@@ -5,7 +5,7 @@ import logo from './components/logo.svg';
 import Accounts from './components/account/accountsComp.js';
 import Game from './components/tictactoe.js';
 import Cities from './components/cities/citiesComp.js';
-import List from './components/list/FifoLifoComp.js/index.js.js';
+import List from './components/list/FifoLifoComp.js';
 import LinkedList from './components/list/LinkedListComp.js';
 class App extends Component {
   constructor() {
@@ -37,7 +37,7 @@ class App extends Component {
         this.setState({ appToRender: <LinkedList /> });
         break;
       default:
-        this.setState({ appToRender: <Cities /> });
+        this.setState({ appToRender: <LinkedList /> });
     }
 
   }
