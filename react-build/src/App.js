@@ -5,7 +5,8 @@ import logo from './components/logo.svg';
 import Accounts from './components/account/accountsComp.js';
 import Game from './components/tictactoe.js';
 import Cities from './components/cities/citiesComp.js';
-import List from './components/list/list.js';
+import List from './components/list/FifoLifoComp.js/index.js.js';
+import LinkedList from './components/list/LinkedListComp.js';
 class App extends Component {
   constructor() {
     super()
@@ -32,6 +33,9 @@ class App extends Component {
       case "list":
         this.setState({ appToRender: <List /> });
         break;
+      case "linkedlist":
+        this.setState({ appToRender: <LinkedList /> });
+        break;
       default:
         this.setState({ appToRender: <Cities /> });
     }
@@ -43,7 +47,7 @@ class App extends Component {
         <div className="header">
           <div onClick={this.logoClick} todo="logo" className="img">
             <img src={logo} className="App-logo img" alt="logo" />
-            <span>   splash </span>
+            <span> Splash </span>
           </div>
           <div onClick={this.logoClick} todo="tictactoe" className="img">
             <img src={logo} className="App-logo img" alt="logo" />
@@ -57,9 +61,13 @@ class App extends Component {
             <img src={logo} className="App-logo img" alt="logo" />
             <span> City&Community </span>
           </div>
-          <div onClick={this.logoClick} todo="list" className="img">
+          <div onClick={this.logoClick} todo="linkedlist" className="img">
             <img src={logo} className="App-logo img" alt="logo" />
             <span> Link Lists </span>  
+          </div>
+          <div onClick={this.logoClick} todo="list" className="img">
+            <img src={logo} className="App-logo img" alt="logo" />
+            <span> FIFO LIFO </span>  
           </div>
           <br></br>
         </div>
