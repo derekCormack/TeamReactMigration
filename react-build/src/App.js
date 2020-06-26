@@ -11,7 +11,7 @@ class App extends Component {
   constructor() {
     super()
     this.state = {
-      appToRender: <Cities />,
+      appToRender: <LinkedList />,
     }
     console.log("what's state: ", this.state.appToRender);
   }

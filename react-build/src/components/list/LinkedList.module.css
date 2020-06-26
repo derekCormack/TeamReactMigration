@@ -1,0 +1,28 @@
+.centerLine {
+        text-align:center;
+        background-color: #68e25d;
+        border-style: solid;
+}
+/* .card {
+    text-align: start !important;
+    border-style: solid;
+    border-radius: 20px#2d500f;
+    background-color: #68e25d;
+    width: 50em;
+    box-shadow: 10 15px 15px 0 rgba(0,0,0,0.2);
+    transition: 0.5s;
+    padding: 8px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    position: relative;
+}
+
+/* .currentCity {
+    background-color:  rgb(182, 170, 224);
+    font-weight: 800;
+} */
+/* 
+.dblock{
+    display: inline-flex;
+}
+ */ 
