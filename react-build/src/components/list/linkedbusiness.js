@@ -1,6 +1,6 @@
 
 
-class Stack{
+class Stack{  //LINK LIST CLASS
 
     constructor() {
         this.current = null;
@@ -42,6 +42,7 @@ class Stack{
         }
         return this.current;
     }
+    // total of all nodes
     find(id) {
         if (!this.current) {
             return false;
@@ -61,7 +62,7 @@ class Stack{
     }
 }
 
-    class Pancake {
+    class Pancake {   //NODE CLASS
         constructor(id, type, diameter, heatLevel) {
             this.id = id;
             this.type = type;

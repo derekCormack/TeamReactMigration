@@ -2,6 +2,11 @@ import React, { Component } from 'react';
 import Logo from './components/logo.js';
 import './App.css';
 import logo from './components/logo.svg';
+import logoBank from './components/bankx.png';
+import logoTTT from './components/ttt.png';
+import logoLL from './components/linkx.png';
+import logoCity from './components/cityx.png';
+import logoFifo from './components/fifox.png';
 import Accounts from './components/account/accountsComp.js';
 import Game from './components/tictactoe.js';
 import Cities from './components/cities/citiesComp.js';
@@ -13,7 +18,7 @@ class App extends Component {
     this.state = {
       appToRender: <LinkedList />,
     }
-    console.log("what's state: ", this.state.appToRender);
+ 
   }
 
   logoClick = (parm) => {
@@ -50,23 +55,23 @@ class App extends Component {
             <span> Splash </span>
           </div>
           <div onClick={this.logoClick} todo="tictactoe" className="img">
-            <img src={logo} className="App-logo img" alt="logo" />
+            <img src={logoTTT} className="App-logo img" alt="logo" />
             <span> TicTacToe </span>
           </div>
           <div onClick={this.logoClick} todo="accounts" className="img">
-            <img src={logo} className="App-logo img" alt="logo" />
+            <img src={logoBank} className="App-logo img" alt="logo" />
             <span> Acct Controller</span>
           </div>
           <div onClick={this.logoClick} todo="city" className="img">
-            <img src={logo} className="App-logo img" alt="logo" />
+            <img src={logoCity} className="App-logo img" alt="logo" />
             <span> City&Community </span>
           </div>
           <div onClick={this.logoClick} todo="linkedlist" className="img">
-            <img src={logo} className="App-logo img" alt="logo" />
+            <img src={logoLL} className="App-logo img" alt="logo" />
             <span> Link Lists </span>  
           </div>
           <div onClick={this.logoClick} todo="list" className="img">
-            <img src={logo} className="App-logo img" alt="logo" />
+            <img src={logoFifo} className="App-logo img" alt="logo" />
             <span> FIFO LIFO </span>  
           </div>
           <br></br>
@@ -74,6 +79,7 @@ class App extends Component {
         {this.state.appToRender}
       </div>
     );
-  }
-}
+  }   
+} 
+
 export default App;
