@@ -10,16 +10,18 @@ class Stack{  //LINK LIST CLASS
     get() {
         return this.current;
     }
+
+    //use code from https://www.geeksforgeeks.org/implementation-linkedlist-javascript/    use add(element code)
     insert(type, diameter, heatLevel) {
         this.count++;
         const id = 'p' + this.count;
-        const cake = new Pancake(id, type, diameter, heatLevel);
-        
+        const cake = new Pancake(id, type, diameter, heatLevel);  //var node = new Node(element); 
+        // let currentNodeX
         if (this.current) { 
+          
             cake.nextCake = this.current.nextCake;
-            cake.nextCake.prevCake = cake;
-
             this.current.nextCake = cake;
+            cake.nextCake.prevCake = cake;
             cake.prevCake = this.current;
 
             this.current = cake;
@@ -30,6 +32,7 @@ class Stack{  //LINK LIST CLASS
         }
         return id;
     }
+
     next() {
         if (this.current) {
             this.current = this.current.nextCake;
@@ -43,6 +46,34 @@ class Stack{  //LINK LIST CLASS
         return this.current;
     }
     // total of all nodes
+    totalNodes(){// determine total inches of all pancakes laid side to side
+        
+        if (!this.current) {
+            return "No Pancakes Yet";
+        }
+        let total=0
+        const startid = this.current.id;
+        while (this.current.nextCake.id !== startid) {
+            
+            total=total+this.current.diameter
+                                    
+            this.next(); 
+        }
+         return total+this.current.diameter+" total inches of diameter"
+    }
+    // 
+    firstNode(){//determine first node of stack
+        this.find("p1");
+        return this.get() 
+    }
+
+    lastNode(){//determine last node of stack
+        const idlast = 'p' + this.count;
+        console.log(idlast)
+        this.find(idlast);
+        return this.get()
+    }
+
     find(id) {
         if (!this.current) {
             return false;

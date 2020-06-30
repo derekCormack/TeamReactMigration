@@ -11,7 +11,6 @@ test('Our Stacks Class', () => {
     const cakeStack = new funcs.Stack();
     expect(cakeStack.get()).toBeNull();
 
-    let pipe;
     cakeStack.insert("wheat",10,'hot');
     expect(cakeStack.get().id).toBe('p1');
 
@@ -38,11 +37,22 @@ test('Our Stacks Class', () => {
     expect(cakeStack.next().id).toBe('p2');
     expect(cakeStack.next().id).toBe('p3');
     expect(cakeStack.next().id).toBe('p1');
+    expect(cakeStack.prev().id).toBe('p3');
+    expect(cakeStack.prev().id).toBe('p2');
+    expect(cakeStack.prev().id).toBe('p1');
 
+    cakeStack.insert("whole wheat",14,'medium');
+    expect(cakeStack.get().id).toBe('p4');
+    expect(cakeStack.prev().id).toBe('p1');
+    expect(cakeStack.next().id).toBe('p4');
+    expect(cakeStack.next().id).toBe('p2');
+    expect(cakeStack.next().id).toBe('p3');
+    expect(cakeStack.next().id).toBe('p2');
 });
 
-test('Our PipeLine Class save and load', () => {
+test('test insert & prev', () => {
     const cakeStack = new funcs.Stack();
+    expect(cakeStack.totalNodes()).toBe("No Pancakes Yet");   
     const startKey = cakeStack.insert("wheat",8,'cold');
     cakeStack.insert("wheat",9,'warm');
     cakeStack.insert("oat",10,'hot');
@@ -53,4 +63,9 @@ test('Our PipeLine Class save and load', () => {
 
     expect(cakeStack.get().id).toBe('p1');
     expect(cakeStack.get().diameter).toBe(8);
+
+    expect(cakeStack.totalNodes()).toBe("38 total inches of diameter");
+    expect(cakeStack.firstNode().id).toBe("p1");
+    expect(cakeStack.lastNode().id).toBe("p4");
+
 });

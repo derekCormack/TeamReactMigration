@@ -35,11 +35,11 @@ class App extends Component {
       case "accounts":
         this.setState({ appToRender: <Accounts /> });
         break;
+      case "city":
+        this.setState({ appToRender: <Cities /> });
+        break;
       case "list":
         this.setState({ appToRender: <List /> });
-        break;
-      case "linkedlist":
-        this.setState({ appToRender: <LinkedList /> });
         break;
       default:
         this.setState({ appToRender: <LinkedList /> });

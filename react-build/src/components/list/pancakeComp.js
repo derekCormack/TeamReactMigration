@@ -3,13 +3,13 @@ import React, { Component} from 'react';
 class Pancake extends Component {
     
     render() {
-        const {type, diameter, heatLevel} = this.props;
+        const {id, type, diameter, heatLevel} = this.props;
         return (
                 <div >
-                    <p >  This {type} pancake is {diameter} inches and {heatLevel}</p>  
-                     Hello
+                    <p >  Pancake {id} is a {type} pancake with {diameter} inches diameter and it's {heatLevel}</p>  
+                    
                 </div>
-        );
+        );//
     }
 };
 
