@@ -47,7 +47,7 @@ test('Our Stacks Class', () => {
     expect(cakeStack.next().id).toBe('p4');
     expect(cakeStack.next().id).toBe('p2');
     expect(cakeStack.next().id).toBe('p3');
-    expect(cakeStack.next().id).toBe('p2');
+    expect(cakeStack.next().id).toBe('p1');
 });
 
 test('test insert & prev', () => {
@@ -55,6 +55,7 @@ test('test insert & prev', () => {
     expect(cakeStack.totalNodes()).toBe("No Pancakes Yet");   
     const startKey = cakeStack.insert("wheat",8,'cold');
     cakeStack.insert("wheat",9,'warm');
+    expect(cakeStack.totalNodes()).toBe("17 total inches of diameter");
     cakeStack.insert("oat",10,'hot');
     cakeStack.prev();
     cakeStack.insert("protein",11,'very hot');
@@ -67,5 +68,8 @@ test('test insert & prev', () => {
     expect(cakeStack.totalNodes()).toBe("38 total inches of diameter");
     expect(cakeStack.firstNode().id).toBe("p1");
     expect(cakeStack.lastNode().id).toBe("p4");
+    expect(cakeStack.next().id).toBe('p3');
+    expect(cakeStack.next().id).toBe('p1'); //p2
+    expect(cakeStack.next().id).toBe('p2');
 
 });
