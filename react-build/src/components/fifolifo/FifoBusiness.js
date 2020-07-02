@@ -1,8 +1,8 @@
-import React from 'react';
+// import React from 'react';
 
-class QueueFifo extends React.Component {
+class QueueFifo  {
     constructor() {
-        super();
+        // super();
         this.data = [];
         this.topElement = 0;
     }
@@ -15,9 +15,12 @@ class QueueFifo extends React.Component {
 
 
     deQueue() {
-        if (!this.isEmpty) {
-            // this.topElement = this.topElement - 1;
-            return this.data.shift();
+        if (this.topElement === 0) {
+            return 0
+            
+       } else {
+        this.topElement = this.topElement - 1;
+        this.data.shift();
         }
     }
 
@@ -40,3 +43,4 @@ class QueueFifo extends React.Component {
     }
 }
 export default QueueFifo;
+

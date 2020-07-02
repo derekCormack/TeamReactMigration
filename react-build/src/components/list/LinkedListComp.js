@@ -77,6 +77,8 @@ function LinkedList() {
     <div style={{ textAlign: 'center' }} >
       <br></br>
       <br></br>
+      <br></br>
+      <br></br>
       <h3> Linked list - Infinite Circle of Pancakes</h3>
 
       <input id="idType" onChange={callType} placeholder="Enter type of pancake "></input><br></br>

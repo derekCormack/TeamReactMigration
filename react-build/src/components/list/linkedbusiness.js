@@ -1,5 +1,5 @@
 
-
+//ref: https://www.geeksforgeeks.org/implementation-linkedlist-javascript/    use add(element code)
 class Stack {  //LINK LIST CLASS
 
     constructor() {
@@ -11,7 +11,7 @@ class Stack {  //LINK LIST CLASS
         return this.current;
     }
 
-    //use code from https://www.geeksforgeeks.org/implementation-linkedlist-javascript/    use add(element code)
+    
     insert(type, diameter, heatLevel) {
         this.count++;
         const id = 'p' + this.count;

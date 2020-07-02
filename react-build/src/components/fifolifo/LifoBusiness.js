@@ -1,24 +1,24 @@
-import React from 'react'
+// import React from 'react'
 
 /// source:   https://medium.com/better-programming/implementing-a-stack-in-javascript-73d1aa0483c1
 
-class StackLifo extends React.Component {
+class StackLifo  {
     
     constructor() {
-        super();
+        // super();
         this.data = [];
         this.topElement = 0;
     }
 
 
-    push(element) { //last in ...always
+    pushZ(element) { //last in ...always
         this.data[this.topElement] = element;
         this.topElement = this.topElement + 1;
     }
 
 
-    pop() {
-        if (!this.isEmpty) {
+    popZ() {
+        if (!this.isEmpty()) {
             this.topElement = this.topElement - 1;
             return this.data.pop();
         }

@@ -10,13 +10,13 @@ import logoFifo from './components/fifox.png';
 import Accounts from './components/account/accountsComp.js';
 import Game from './components/tictactoe.js';
 import Cities from './components/cities/citiesComp.js';
-import List from './components/list/FifoLifoComp.js';
+import List from './components/fifolifo/FifoLifoComp.js';
 import LinkedList from './components/list/LinkedListComp.js';
 class App extends Component {
   constructor() {
     super()
     this.state = {
-      appToRender: <LinkedList />,
+      appToRender: <List />,
     }
  
   }
@@ -38,11 +38,14 @@ class App extends Component {
       case "city":
         this.setState({ appToRender: <Cities /> });
         break;
+      case "linkedlist":
+        this.setState({ appToRender: <LinkedList /> });
+        break;
       case "list":
         this.setState({ appToRender: <List /> });
         break;
       default:
-        this.setState({ appToRender: <LinkedList /> });
+        this.setState({ appToRender: <List /> });
     }
 
   }
