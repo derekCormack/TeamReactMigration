@@ -89,10 +89,10 @@ function LinkedList() {
 
       <h3> {output}</h3>
 
-      <button onClick={onFirst} style={{ color: 'purple', fontWeight: 'bold' }}> First </button>
-      <button onClick={onPrevious} style={{ color: 'orange', fontWeight: 'bold' }}> previous </button>
-      <button onClick={onNext} style={{ color: 'green', fontWeight: 'bold' }}> next </button>
-      <button onClick={onLast} style={{ color: 'purple', fontWeight: 'bold' }}> Last </button><br></br>
+      <button onClick={onFirst} style={{ color: 'purple', fontWeight: 'bold' }}> Earliest </button>
+      <button onClick={onPrevious} style={{ color: 'orange', fontWeight: 'bold' }}> Previous </button>
+      <button onClick={onNext} style={{ color: 'green', fontWeight: 'bold' }}> Next </button>
+      <button onClick={onLast} style={{ color: 'purple', fontWeight: 'bold' }}> Lastest </button><br></br>
       <button onClick={onDelete} style={{ color: 'red', fontWeight: 'bold' }}> Delete Current </button><br></br>
 
       {stack.totalNodes()}
