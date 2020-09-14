@@ -26,17 +26,17 @@ function List() {
     setName(document.getElementById("idName").value);
   }
   function onCreate() {
-    lifo.pushZ(name)
+    lifo.pushZ(name)    //lifo instansiation pushed
     fifo.enQueue(name)
     console.log(lifo.data)
-    setCounter(counter + 1)
+    setCounter(counter + 1)  //ensures re render
   }
   function onServe() {
-    fifoCustomer=<FifoLifo key={2} pancake={fifo.data[0]} />
-    fifo.deQueue()
-    lifoCustomer =<FifoLifo key={1} pancake={lifo.popZ()} />
+    fifoCustomer=<FifoLifo key={2} pancake={fifo.data[0]} /> //create pancake on customer plate
+    fifo.deQueue()  //illiminate first object in array
+    lifoCustomer =<FifoLifo key={1} pancake={lifo.popZ()} />  // 1. put on customer plate, deletes from array
     console.log("click");
-    setCounter(counter + 1)
+    setCounter(counter + 1)  // resets state.
   }
 
 

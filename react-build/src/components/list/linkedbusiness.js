@@ -16,7 +16,7 @@ class Stack {  //LINK LIST CLASS
         this.count++;
         const id = 'p' + this.count;
         const cake = new Pancake(id, type, diameter, heatLevel);  //var node = new Node(element); 
-        // let currentNodeX
+       
         if (this.current) {
 
             cake.nextCake = this.current.nextCake;

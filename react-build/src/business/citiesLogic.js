@@ -11,7 +11,7 @@ class city {
     show() {
         return this.name + " has " + this.population + " people at position " + this.latitude + "/" + this.longitude;
     }
-    movedIn(num) {
+    movedIn(num) {    // error condition, double check, frontend response for error
         if (this.population + num > 0  ) {
         this.population = this.population + num;
         }

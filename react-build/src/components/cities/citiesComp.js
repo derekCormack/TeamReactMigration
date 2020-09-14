@@ -79,14 +79,19 @@ class Cities extends React.Component {
         this.setState({ longitude: Number(e.target.value) })
     }
     createCity = async () => {
-        if (this.state.latitude < 90 && this.state.latitude > -90 && this.state.longitude < 180 && this.state.longitude > -180) {
-            this.community.createCity(this.state.cityName, this.state.latitude, this.state.longitude, this.state.population,)
-            this.setState({ message: "" })
-            data = await functions.postData(url + 'add', 
-            this.community.citiesArray
-            [this.community.keyPosition(this.community.getKeyFromName(this.state.cityName))]);
+            if ( this.state.latitude <= 90 &&
+                 this.state.latitude >= -90 &&
+                 this.state.longitude <= 180 &&
+                 this.state.longitude >= -180 &&
+                 this.state.population > 0 &&
+                 this.state.population === Math.round(this.state.population)) {
+                    this.community.createCity(this.state.cityName, this.state.latitude, this.state.longitude, this.state.population,)
+                    this.setState({ message: "" })
+                    data = await functions.postData(url + 'add', 
+                    this.community.citiesArray
+                    [this.community.keyPosition(this.community.getKeyFromName(this.state.cityName))]);
         } else {
-            this.setState({ message: "Input Out of Range! Use lat [-90 to 90], long [-180 to 180]" });
+            this.setState({ message: "Input Out of Range! Use lat [-90 to 90], long [-180 to 180], Population Integer > 0" });
     }
     }
     handleSelectCity = (name) => {
@@ -95,7 +100,7 @@ class Cities extends React.Component {
     moveInOut = async () => {
         let cityKey = this.community.getKeyFromName(this.state.selectedCity);//gives position within acctcontroller array
         let keyPosition = this.community.keyPosition(cityKey);
-        if (typeof (keyPosition) !== 'undefined') {
+        if (typeof (keyPosition) !== 'undefined' && Math.round(this.state.population)) {
             let populationChange = document.getElementById("popChange").value;
             this.community.citiesArray[keyPosition].movedIn(Number(populationChange))
             this.setState({ counter: 0 })
