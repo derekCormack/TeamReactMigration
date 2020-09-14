@@ -11,7 +11,7 @@ class Stack {  //LINK LIST CLASS
         return this.current;
     }
 
-    
+
     insert(type, diameter, heatLevel) {
         this.count++;
         const id = 'p' + this.count;
@@ -34,20 +34,20 @@ class Stack {  //LINK LIST CLASS
     }
     delete() {
         if (this.current) {
-            if(this.current===this.current.nextCake){
-                this.current=null
+            if (this.current === this.current.nextCake) {
+                this.current = null
                 console.log("first case")
                 return 0
             }
             console.log("second case")
-            this.current.nextCake.prevCake=this.current.prevCake
-            this.current.prevCake.nextCake=this.current.nextCake
+            this.current.nextCake.prevCake = this.current.prevCake
+            this.current.prevCake.nextCake = this.current.nextCake
             this.current = this.current.prevCake;
 
         } else {
             return 0
         }
-        
+
     }
     next() {
         if (this.current) {
@@ -83,14 +83,39 @@ class Stack {  //LINK LIST CLASS
     }
     // 
     firstNode() {//determine first node of stack
-        this.find("p1");
-        return this.get()
+        let startId = this.current.id
+        let bestId = this.current.id
+        let best = this.current
+        this.next();
+        while (this.current.id !== startId) {
+            if (bestId > this.current.id) {
+                bestId = this.current.id
+                best = this.current
+            }
+            this.next();
+        }
+
+        // this.find("p1");
+        this.current = best
+       
     }
 
     lastNode() {//determine last node of stack
-        const idlast = 'p' + this.count;
-        this.find(idlast);
-        return this.get()
+        let startId = this.current.id
+        let bestId = this.current.id
+        let best = this.current
+        this.next();
+        while (this.current.id !== startId) {
+            if (bestId < this.current.id) {
+                bestId = this.current.id
+                best = this.current
+            }
+            this.next();
+        }
+
+        // this.find("p1");
+        this.current = best
+       
     }
 
     find(id) {
